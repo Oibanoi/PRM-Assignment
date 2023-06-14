@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace 'com.example.networksocial'
+    namespace 'com.prm.prm_assignment'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.networksocial"
-        minSdk 24
+        applicationId "com.prm.prm_assignment"
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
