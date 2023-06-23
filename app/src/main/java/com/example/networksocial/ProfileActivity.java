@@ -1,6 +1,5 @@
 package com.example.networksocial;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +25,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Action bar and it's title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("User Profile");
+
+        if (actionBar != null) {
+            actionBar.setTitle("User Profile");
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
 
