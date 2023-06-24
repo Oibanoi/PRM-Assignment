@@ -18,16 +18,11 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
-            android:exported="false"/>
+            android:name=".DashboardActivity"
+            android:exported="true"/>
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
-        <activity
-            android:name=".register"
-            android:exported="false"
-            android:label="@string/title_activity_register"
-            android:theme="@style/Base.Theme.NetworkSocial" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
