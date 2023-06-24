@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(RegisterActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
                         }
-                        startActivity(new Intent(RegisterActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
 
                     } else {
                         Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
