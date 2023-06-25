@@ -84,6 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
             //mProfileTv.setText(user.getEmail());
         } else {
             startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+            finish();
         }
     }
 
@@ -91,25 +92,5 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onStart() {
         checkUserStatus();
         super.onStart();
-    }
-
-    //Inflate options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //Handle menu item clicks
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //get item id
-        int id = item.getItemId();
-        if(id == R.id.action_logout) {
-            firebaseAuth.signOut();
-            checkUserStatus();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
