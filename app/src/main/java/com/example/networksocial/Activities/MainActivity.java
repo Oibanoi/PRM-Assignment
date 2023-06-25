@@ -1,10 +1,12 @@
-package com.example.networksocial;
+package com.example.networksocial.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.networksocial.R;
 
 public class MainActivity extends AppCompatActivity {
 

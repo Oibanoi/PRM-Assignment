@@ -1,4 +1,4 @@
-package com.example.networksocial;
+package com.example.networksocial.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.networksocial.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
