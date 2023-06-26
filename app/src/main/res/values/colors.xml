@@ -5,5 +5,5 @@
     <color name="colorAccent">#9b1ac9</color>
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
-
+    <color name="colorBGChat">#F1EDED</color>
 </resources>
