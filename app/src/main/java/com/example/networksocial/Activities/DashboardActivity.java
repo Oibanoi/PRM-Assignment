@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.networksocial.Fragments.ChatListFragment;
 import com.example.networksocial.Fragments.HomeFragment;
 import com.example.networksocial.Fragments.ProfileFragment;
 import com.example.networksocial.Fragments.UsersFragment;
@@ -52,7 +53,6 @@ public class DashboardActivity extends AppCompatActivity {
             FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
             ft1.replace(R.id.content ,homeFragment, "");
             ft1.commit();
-
             return true;
         } else if (id == R.id.nav_profile) {
 
@@ -61,7 +61,6 @@ public class DashboardActivity extends AppCompatActivity {
             FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
             ft2.replace(R.id.content ,profileFragment, "");
             ft2.commit();
-
             return true;
         } else if (id == R.id.nav_users) {
 
@@ -70,6 +69,14 @@ public class DashboardActivity extends AppCompatActivity {
             FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
             ft3.replace(R.id.content ,usersFragment, "");
             ft3.commit();
+            return true;
+        } else if (id == R.id.nav_chat) {
+
+            //Users fragment
+            ChatListFragment chatListFragment = new ChatListFragment();
+            FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
+            ft4.replace(R.id.content, chatListFragment, "");
+            ft4.commit();
             return true;
         }
         return false;
