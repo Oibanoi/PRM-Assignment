@@ -1,4 +1,4 @@
-package com.example.networksocial;
+package com.example.networksocial.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,8 +12,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.networksocial.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -83,6 +89,23 @@ public class RegisterActivity extends AppCompatActivity {
                         //suscess, dismiss dialog and start register activity
                         progressDialog.dismiss();
                         FirebaseUser user = mAuth.getCurrentUser();
+                        //Get user email and uid
+                        String userEmail = user.getEmail();
+                        String userUid = user.getUid();
+                        //When user registered store user into firebase realtime
+                        //using HashMap
+                        HashMap<Object, String> hashMap = new HashMap<>();
+                        //put info into hashMap
+                        hashMap.put("email",userEmail);
+                        hashMap.put("uid", userUid);
+                        hashMap.put("name", "");
+                        hashMap.put("phone", "");
+                        hashMap.put("image", "");
+                        FirebaseDatabase fData = FirebaseDatabase.getInstance();
+                        //path to store user data named "Users"
+                        DatabaseReference ref = fData.getReference("Users");
+                        //put data within hashmap in database
+                        ref.child(userUid).setValue(hashMap);
 
                         if (user != null) {
                             Toast.makeText(RegisterActivity.this, "Registered... \n" + user.getEmail(), Toast.LENGTH_SHORT).show();

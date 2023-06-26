@@ -1,71 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Color_Lola"
-    tools:context=".ProfileFragment">
+    android:background="#F1EDED"
+    tools:context=".Fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="180dp"
+           android:background="@color/colorPrimaryDark">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#D64D86">
 
-        </RelativeLayout>
+       </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="100dp">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="120dp"
+           android:orientation="horizontal"
+           android:layout_marginTop="100dp">
 
-            <ImageView
+           <ImageView
+               android:id="@+id/avatarTv"
+               android:layout_marginStart="20dp"
+               android:background="@color/colorPrimary"
+               android:padding="5dp"
+               android:src="@drawable/ic_add_image"
+               android:layout_width="120dp"
+               android:layout_height="120dp"
+               android:layout_marginLeft="20dp"/>
 
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="25dp"
-                android:src="@drawable/ic_users_black"
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
 
-                />
+               <TextView
+                   android:id="@+id/nameTv"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="5dp"
+                   android:text="Name"
+                   android:layout_marginTop="5dp"
+                   android:textSize="25sp"
+                   android:textColor="@color/colorWhite"
+                   android:layout_marginLeft="5dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+               <TextView
+                   android:id="@+id/emailTv"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="5dp"
+                   android:text="Email"
+                   android:textColor="@color/colorWhite"
+                   android:layout_marginLeft="5dp"/>
 
-                <TextView
+               <TextView
+                   android:id="@+id/phoneTv"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="5dp"
+                   android:text="Phone"
+                   android:textColor="@color/colorWhite"
+                   android:layout_marginLeft="5dp"/>
 
-                    android:id="@+id/tv_Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/name"
-                    android:textSize="25sp" />
-                <TextView
-                    android:id="@+id/tv_Email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:layout_marginStart="20dp"
+           </LinearLayout>
+       </LinearLayout>
 
-                    />
-                <TextView
-                    android:id="@+id/tv_Phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone"
-                    android:layout_marginStart="20dp"
-                    />
+   </RelativeLayout>
 
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+
 </ScrollView>
