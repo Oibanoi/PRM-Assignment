@@ -41,9 +41,8 @@
                 android:id="@+id/phoneTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Person Phone"
+                android:text="Personal phone"
                 android:textColor="@color/colorBlack"/>
-
         </LinearLayout>
 
     </LinearLayout>
