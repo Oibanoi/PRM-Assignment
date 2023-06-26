@@ -75,7 +75,6 @@ public class DashboardActivity extends AppCompatActivity {
         return false;
     };
 
-
     private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if( user != null) {

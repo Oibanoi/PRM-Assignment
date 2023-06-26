@@ -44,6 +44,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         String userImage = userList.get(position).getImage();
         String userName = userList.get(position).getName();
         String userEmail = userList.get(position).getEmail();
+        String userPhone = userList.get(position).getPhone();
 
         //Set data
         holder.mNameTv.setText(userName);
@@ -53,6 +54,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         } catch (Exception e) {
 
         }
+        holder.mPhoneTv.setText(userPhone);
 
         //Handle item click
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +74,14 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     class MyHolder extends RecyclerView.ViewHolder{
 
         ImageView mAvatarTv;
-        TextView mNameTv, mEmailTv;
+        TextView mNameTv, mEmailTv, mPhoneTv;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             mAvatarTv = itemView.findViewById(R.id.avatarTv);
             mNameTv = itemView.findViewById(R.id.nameTv);
             mEmailTv = itemView.findViewById(R.id.emailTv);
+            mPhoneTv = itemView.findViewById(R.id.phoneTv);
         }
     }
 }
