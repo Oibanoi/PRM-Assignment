@@ -37,6 +37,13 @@
                 android:layout_height="wrap_content"
                 android:text="Person Email"
                 android:textColor="@color/colorBlack"/>
+            <TextView
+                android:id="@+id/phoneTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Person Phone"
+                android:textColor="@color/colorBlack"/>
+
         </LinearLayout>
 
     </LinearLayout>
