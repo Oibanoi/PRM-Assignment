@@ -137,6 +137,11 @@ public class UsersFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
+        //hide addPost icon from this fragment
+        menu.findItem(R.id.action_add_post).setVisible(false);
+
+
         //Search View
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -177,6 +182,7 @@ public class UsersFragment extends Fragment {
             //set email of logged in user
             //mProfileTv.setText(user.getEmail());
         } else {
+            //user not signed in, go to main activity
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.networksocial.Activities.AddPostActivity;
 import com.example.networksocial.Activities.DashboardActivity;
 import com.example.networksocial.Activities.MainActivity;
 import com.example.networksocial.R;
@@ -23,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -31,6 +33,8 @@ public class HomeFragment extends Fragment {
     GoogleSignInClient gsc;
     private GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth firebaseAuth;
+
+    FloatingActionButton fabCreatePost;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,6 +49,20 @@ public class HomeFragment extends Fragment {
         initGoogleSignInClient();
 
         Button button = view.findViewById(R.id.btn_SignOut);
+        fabCreatePost = view.findViewById(R.id.fab_createPost);
+
+        //Go to publish post
+        fabCreatePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), AddPostActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
 
         // Gắn sự kiện onClick cho button
         button.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +110,10 @@ public class HomeFragment extends Fragment {
         if(id == R.id.action_logout) {
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+
+        if(id == R.id.action_add_post) {
+            startActivity(new Intent(getActivity(), AddPostActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
