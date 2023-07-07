@@ -25,15 +25,31 @@
             tools:layout_editor_absoluteX="2dp"
             tools:layout_editor_absoluteY="2dp" />
 
-        <!--    Image View -->
-        <ImageView
-            android:id="@+id/pImageIv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:scaleType="fitXY"
-            android:minHeight="200dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <!--    Image View -->
+            <ImageView
+                android:id="@+id/pImageIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+
+                android:minHeight="200dp"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_ChooseImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Choose Image"
+                android:textColor="#ffffff"
+                android:textSize="25sp" />
+        </RelativeLayout>
 
         <!--    Edit Text-->
         <EditText
@@ -55,10 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Upload"
-
-            />
-
+            android:text="Upload" />
 
     </LinearLayout>
 

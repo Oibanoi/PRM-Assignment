@@ -20,9 +20,13 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.networksocial.R;
@@ -65,6 +69,7 @@ public class AddPostActivity extends AppCompatActivity {
     String[] storagePermissions;
 
 
+    TextView chooseImageTv;
     EditText titleEt, descriptionEt;
     ImageView imageIv;
     Button uploadBtn;
@@ -77,6 +82,8 @@ public class AddPostActivity extends AppCompatActivity {
     //progress bar
     ProgressDialog pd;
 
+    int originalWidth;
+    int originalHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,9 @@ public class AddPostActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+
+
 
         //init permissions array
         cameraPermissions = new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -132,7 +142,7 @@ public class AddPostActivity extends AppCompatActivity {
         descriptionEt = findViewById(R.id.pDescriptionEt);
         imageIv = findViewById(R.id.pImageIv);
         uploadBtn = findViewById(R.id.pUploadBtn);
-
+        chooseImageTv = findViewById(R.id.tv_ChooseImage);
 
         //get Image from camera / gallery on click
         imageIv.setOnClickListener(new View.OnClickListener() {
@@ -179,10 +189,15 @@ public class AddPostActivity extends AppCompatActivity {
 
     }
 
+
+
     private void uploadData(String title, String description, String uri) {
 
         pd.setMessage("Publishing post...");
         pd.show();
+
+        // Thiết lập LayoutParams mới với width và height gốc
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(originalWidth, originalHeight);
 
         //for image name, post id, post publish-time
         String timeStamp = String.valueOf(System.currentTimeMillis());
@@ -235,7 +250,11 @@ public class AddPostActivity extends AppCompatActivity {
                                 titleEt.setText("");
                                 descriptionEt.setText("");
                                 imageIv.setImageURI(null);
+//                              imageIv.setImageDrawable(null);
+                                imageIv.setLayoutParams(layoutParams);
                                 image_uri = null;
+
+                                checkChooseImageTv();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -405,12 +424,27 @@ public class AddPostActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         checkUserStatus();
+
+        //get height, width of default imageView
+        originalHeight = imageIv.getHeight();
+        originalWidth = imageIv.getWidth();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         checkUserStatus();
+
+        checkChooseImageTv();
+    }
+
+    //check if image was choose: the chooseImageTv will gone
+    public void  checkChooseImageTv() {
+        if (imageIv.getDrawable() != null) {
+            chooseImageTv.setVisibility(View.GONE); // Ẩn TextView nếu đã có hình ảnh
+        } else {
+            chooseImageTv.setVisibility(View.VISIBLE); // Hiển thị TextView nếu chưa có hình ảnh
+        }
     }
 
     private void checkUserStatus() {
