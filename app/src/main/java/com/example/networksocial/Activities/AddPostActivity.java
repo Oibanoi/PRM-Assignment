@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -20,7 +21,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +51,8 @@ import java.util.Objects;
 
 public class AddPostActivity extends AppCompatActivity {
     ActionBar actionBar;
+
+    Toolbar toolbar;
     FirebaseAuth firebaseAuth;
 
     DatabaseReference userDbRef;
@@ -90,15 +92,14 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
-        if (actionBar != null) {
-            actionBar = getSupportActionBar();
-            actionBar.setTitle("Add New Post");
-
-            //enabled back button in actionBar
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
+//        if (actionBar != null) {
+//            actionBar = getSupportActionBar();
+//            actionBar.setTitle("Add New Post");
+//
+//            //enabled back button in actionBar
+//            actionBar.setDisplayShowHomeEnabled(true);
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
 
 
 
