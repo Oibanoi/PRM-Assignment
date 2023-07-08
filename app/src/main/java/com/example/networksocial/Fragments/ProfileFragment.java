@@ -571,6 +571,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
+
+        //hide addPost icon from this fragment
+        menu.findItem(R.id.action_add_post).setVisible(false);
+
+        //hide search icon from this fragment
+        menu.findItem(R.id.action_search).setVisible(false);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -595,7 +602,6 @@ public class ProfileFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
-
         if(id == R.id.action_add_post) {
             startActivity(new Intent(getActivity(), AddPostActivity.class));
         }

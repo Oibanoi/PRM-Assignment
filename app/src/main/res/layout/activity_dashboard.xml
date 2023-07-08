@@ -8,6 +8,10 @@
     android:gravity="center"
     tools:context=".Activities.DashboardActivity">
 
+    <include
+        layout="@layout/toolbar"
+        />
+
 <!-- Show email of logged in user -->
 <!--    <TextView-->
 <!--        android:id="@+id/profileTv"-->
@@ -17,7 +21,6 @@
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        />-->
-
 <!--    Show fragment -->
 
 

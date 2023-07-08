@@ -3,11 +3,14 @@ package com.example.networksocial.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.networksocial.Fragments.ChatListFragment;
@@ -22,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class DashboardActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
+    private Toolbar toolbar;
+
 
     TextView mProfileTv;
     BottomNavigationView navigationView;
@@ -32,15 +37,18 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         //Action bar and it's title
-        ActionBar actionBar = getSupportActionBar();
+//        ActionBar actionBar = getSupportActionBar();
         //mProfileTv = findViewById(R.id.profileTv);
 
-        if (actionBar != null) {
-            actionBar.setTitle("User Profile");
-        }
+//        if (actionBar != null) {
+//            actionBar.setTitle("User Profile");
+//        }
 
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView = findViewById(R.id.navigation);
+        toolbar = findViewById(R.id.myToolbar);
+
+        setSupportActionBar(toolbar);
 
         navigationView.setOnNavigationItemSelectedListener(selectedItem);
     }
@@ -99,4 +107,5 @@ public class DashboardActivity extends AppCompatActivity {
         checkUserStatus();
         super.onStart();
     }
+
 }

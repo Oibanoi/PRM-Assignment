@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.example.networksocial.Activities.AddPostActivity;
 import com.example.networksocial.Activities.MainActivity;
 import com.example.networksocial.Adapter.AdapterUsers;
 import com.example.networksocial.Models.Users;
@@ -141,7 +142,6 @@ public class UsersFragment extends Fragment {
         //hide addPost icon from this fragment
         menu.findItem(R.id.action_add_post).setVisible(false);
 
-
         //Search View
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -196,6 +196,9 @@ public class UsersFragment extends Fragment {
         if(id == R.id.action_logout) {
             firebaseAuth.signOut();
             checkUserStatus();
+        }
+        if(id == R.id.action_add_post) {
+            startActivity(new Intent(getActivity(), AddPostActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
