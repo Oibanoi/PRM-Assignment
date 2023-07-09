@@ -1,5 +1,7 @@
 package com.example.networksocial.Activities;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -29,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.networksocial.Fragments.HomeFragment;
 import com.example.networksocial.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -150,11 +154,12 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //show image pick dialog
-
                 showImagePickDialog();
 
             }
         });
+
+
 
 
         //upload button click listener
@@ -184,10 +189,16 @@ public class AddPostActivity extends AppCompatActivity {
 
                 }
 
+               changeScreen(v);
+
             }
         });
 
+    }
 
+    public void changeScreen (View view) {
+        Intent intent = new Intent(  view.getContext() , DashboardActivity.class );
+        startActivity(intent);
     }
 
 
@@ -257,6 +268,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                                 checkChooseImageTv();
 
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -325,8 +337,10 @@ public class AddPostActivity extends AppCompatActivity {
             });
 
         }
-
     }
+
+
+
 
     private void showImagePickDialog() {
         // options (camera, gallery) to show in dialog

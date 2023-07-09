@@ -94,13 +94,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-
-    }
 
     private void loadPosts() {
         //path of all posts

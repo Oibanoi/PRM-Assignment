@@ -75,7 +75,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
             holder.pImageIv.setVisibility(View.GONE);
         } else  {
             try {
-                Picasso.get().load(uDp).placeholder(R.drawable.ic_default_img).into(holder.uPictureIv);
+                Picasso.get().load(pImage).into(holder.pImageIv);
+
             } catch (Exception ex ) {
                 //hide imageView
                 holder.pImageIv.setVisibility(View.GONE);
@@ -83,10 +84,9 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
         }
 
         try {
-            Picasso.get().load(uDp).placeholder(R.drawable.ic_default_img).into(holder.pImageIv);
-
+            Picasso.get().load(uDp).into(holder.uPictureIv);
         } catch (Exception ex ) {
-
+            Picasso.get().load(uDp).placeholder(R.drawable.ic_default_img).into(holder.uPictureIv);
         }
 
         //handle button clicks
