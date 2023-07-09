@@ -368,7 +368,7 @@ public class ProfileFragment extends Fragment {
                         pickFromCamera();
                     }
 
-                    showImagePicDialog();
+//                    showImagePicDialog();
 
                 } else if (which == 1) {
 
@@ -379,7 +379,7 @@ public class ProfileFragment extends Fragment {
                         pickFromGallery();
                     }
 
-                    showImagePicDialog();
+//                    showImagePicDialog();
 
                 }
 

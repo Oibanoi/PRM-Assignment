@@ -36,13 +36,12 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        //Action bar and it's title
-//        ActionBar actionBar = getSupportActionBar();
-        //mProfileTv = findViewById(R.id.profileTv);
+        //Run fragment home first after run activity
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+        ft1.replace(R.id.content ,homeFragment, "");
+        ft1.commit();
 
-//        if (actionBar != null) {
-//            actionBar.setTitle("User Profile");
-//        }
 
         firebaseAuth = FirebaseAuth.getInstance();
         navigationView = findViewById(R.id.navigation);
