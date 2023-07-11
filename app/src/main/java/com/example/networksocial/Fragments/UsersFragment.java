@@ -128,6 +128,7 @@ public class UsersFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true); //to show menu option in fragment
