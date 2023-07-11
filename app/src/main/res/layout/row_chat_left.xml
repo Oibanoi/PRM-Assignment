@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/isSeenTv"
         android:gravity="end"
+        android:visibility="gone"
         android:textAlignment="textEnd"
         android:text="delevered"/>
 
