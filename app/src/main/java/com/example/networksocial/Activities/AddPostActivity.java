@@ -52,7 +52,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Objects;
 
-
 public class AddPostActivity extends AppCompatActivity {
     ActionBar actionBar;
 
