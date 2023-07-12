@@ -84,9 +84,9 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
             @Override
             public void onClick(View v) {
                 /* Click user from user list to start chatting, use UID to identify */
-                //Intent intent = new Intent(context, ChatActivity.class);
-                //intent.putExtra("userUID", userUID);
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("userUID", userUID);
+                context.startActivity(intent);
             }
         });
 
