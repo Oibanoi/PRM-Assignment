@@ -76,18 +76,12 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         holder.mPhoneTv.setText(userPhone);
 
         holder.mblockIv.setImageResource(R.drawable.ic_unblock);
+
         //check each user if blocked or not
         checkIsBlocked(userUID, holder, position);
-
         //Handle item click
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /* Click user from user list to start chatting, use UID to identify */
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("userUID", userUID);
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            imBlockedOrNot(userUID);
         });
 
         //Click to block, unblock user
@@ -106,7 +100,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     private void imBlockedOrNot(String userUID) {
         //first check if current user is blocked by receiver or not
         //if blocked then display a message "Cannot send message"
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(userUID).child("BlockedUsers").orderByChild("uid").equalTo(myUid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -118,6 +112,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                             }
                         }
                         Intent intent = new Intent(context, ChatActivity.class);
+                        intent.putExtra("userUID", userUID);
                         context.startActivity(intent);
                     }
                     @Override
@@ -140,10 +135,8 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
     }
@@ -161,7 +154,6 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                     public void onSuccess(Void unused) {
                         //block successfully
                         Toast.makeText(context, "Block successfully!", Toast.LENGTH_SHORT).show();
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

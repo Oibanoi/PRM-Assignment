@@ -19,8 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.networksocial.Adapter.AdapterChat;
+import com.example.networksocial.Adapter.AdapterUsers;
 import com.example.networksocial.Models.Chat;
 import com.example.networksocial.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
-    ImageView profileTv;
+    ImageView profileTv, blockIv;
     TextView nameTv, userStatusTv;
     EditText messageEt;
     ImageButton sendBtn;
@@ -57,6 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     List<Chat> chatList;
     AdapterChat adapterChat;
 
+    boolean isBlocked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         toolbar.setTitle("");
         recyclerView = findViewById(R.id.chat_recyclerView);
         profileTv = findViewById(R.id.profileTv);
+        blockIv = findViewById(R.id.blockIv);
         nameTv = findViewById(R.id.nameTv);
         userStatusTv = findViewById(R.id.userStatusTv);
         messageEt = findViewById(R.id.messageEt);
@@ -125,9 +130,98 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        blockIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isBlocked) {
+                    unblockUser();
+                } else {
+                    blockUser();
+                }
+            }
+        });
+
         readMessages();
 
+        checkIsBlocked();
+
         seenMessage();
+    }
+
+    private void checkIsBlocked() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid()).child("BlockedUsers").orderByChild("uid").equalTo(userUID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds : snapshot.getChildren()) {
+                            if(ds.exists()) {
+                                blockIv.setImageResource(R.drawable.ic_block);
+                                isBlocked = true;
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+    }
+
+    private void blockUser() {
+        //block the user by adding uid to current BlockedUsers node
+
+        //put value in hashmap
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("uid", userUID);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(myUid).child("BlockedUsers").child(userUID).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //block successfully
+                        Toast.makeText(ChatActivity.this, "Block successfully!", Toast.LENGTH_SHORT).show();
+                        blockIv.setImageResource(R.drawable.ic_block);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //block fail
+                        Toast.makeText(ChatActivity.this, "Block failed! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        blockIv.setImageResource(R.drawable.ic_unblock);
+                    }
+                });
+    }
+
+    private void unblockUser() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(myUid).child("BlockedUsers").orderByChild("uid").equalTo(userUID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds : snapshot.getChildren()) {
+                            if(ds.exists()) {
+                                ds.getRef().removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(ChatActivity.this, "UnBlock successfully!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(ChatActivity.this, "Failed to unblock " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
 
     private void seenMessage() {
@@ -144,7 +238,6 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -179,12 +272,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
         String timestamp=String.valueOf(System.currentTimeMillis());
-
         HashMap<String, Object> hashMap=new HashMap<>();
         hashMap.put("sender", myUid);
         hashMap.put("receiver", userUID);
