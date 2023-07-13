@@ -324,6 +324,62 @@ public class ProfileFragment extends Fragment {
 
                                 }
                             });
+
+                    if (key.equals("name")) {
+                        //update name of current user in his posts
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                        Query query = ref.orderByChild("uid").equalTo(user.getUid());
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot ds : snapshot.getChildren()) {
+                                    String child = ds.getKey();
+                                    snapshot.getRef().child(child).child("uName").setValue(value);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    //update name in current user's comments on posts
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                String child = ds.getKey();
+                                if (snapshot.child(child).hasChild("Comments")) {
+                                    String child1 = "" + snapshot.child(child).getKey();
+                                    Query child2 = FirebaseDatabase.getInstance().getReference("Posts").child(child1).child("Comments").orderByChild("uid").equalTo(user.getUid());
+                                    child2.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                                String child = ds.getKey();
+                                                snapshot.getRef().child(child).child("uName").setValue(value);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                 } else {
                     Toast.makeText(getActivity(), "Please enter: " + key, Toast.LENGTH_SHORT).show();
                 }
@@ -479,7 +535,7 @@ public class ProfileFragment extends Fragment {
                         //image is uploaded to storage, now git it's uri and store in user's database
                         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
 
-                        while (!uriTask.isSuccessful());
+                        while (!uriTask.isSuccessful()) ;
                         Uri downloadUri = uriTask.getResult();
 
                         //check if image is upload or not  and uri is received
@@ -602,7 +658,7 @@ public class ProfileFragment extends Fragment {
             firebaseAuth.signOut();
             checkUserStatus();
         }
-        if(id == R.id.action_add_post) {
+        if (id == R.id.action_add_post) {
             startActivity(new Intent(getActivity(), AddPostActivity.class));
         }
         return super.onOptionsItemSelected(item);
