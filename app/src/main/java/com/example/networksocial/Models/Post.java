@@ -4,6 +4,8 @@ public class Post {
     private String pId;
     private String pTitle;
     private String pDescr;
+    private String pLikes;
+
     private String pImage;
     private String pTime;
     private String uId;
@@ -15,10 +17,11 @@ public class Post {
 
     }
 
-    public Post(String pId, String pTitle, String pDescr, String pImage, String pTime, String uId, String uEmail, String uDp, String uName) {
+    public Post(String pId, String pTitle, String pDescr, String pLikes, String pImage, String pTime, String uId, String uEmail, String uDp, String uName) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescr = pDescr;
+        this.pLikes = pLikes;
         this.pImage = pImage;
         this.pTime = pTime;
         this.uId = uId;
@@ -49,6 +52,14 @@ public class Post {
 
     public void setpDescr(String pDescr) {
         this.pDescr = pDescr;
+    }
+
+    public String getpLikes() {
+        return pLikes;
+    }
+
+    public void setpLikes(String pLikes) {
+        this.pLikes = pLikes;
     }
 
     public String getpImage() {
@@ -98,5 +109,4 @@ public class Post {
     public void setuName(String uName) {
         this.uName = uName;
     }
-
 }
