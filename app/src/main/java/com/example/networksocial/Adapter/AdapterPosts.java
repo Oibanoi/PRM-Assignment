@@ -1,5 +1,6 @@
 package com.example.networksocial.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -35,12 +36,18 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
 
     Context context;
     List<Post> postList;
-
+    String myUid;
+    private DatabaseReference likesRef;
+    private DatabaseReference postsRef;
     boolean mProcessLike = false;
 
     public AdapterPosts(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
+
+        myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
     }
 
     @NonNull
@@ -53,16 +60,16 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, @SuppressLint("RecyclerView") int position) {
         //get data
-        String uid = postList.get(position).getuId();
+        final String uid = postList.get(position).getuId();
         String uEmail = postList.get(position).getuEmail();
         String uName = postList.get(position).getuName();
         String uDp = postList.get(position).getuDp();
-        String pId = postList.get(position).getpId();
+        final String pId = postList.get(position).getpId();
         String pTitle = postList.get(position).getpTitle();
         String pDescription = postList.get(position).getpDescr();
-        String pImage = postList.get(position).getpImage();
+        final String pImage = postList.get(position).getpImage();
         String pTimeStamp = postList.get(position).getpTime();
         String pLikes = postList.get(position).getpLikes(); //contains total number of likes for a post
         String pComments = postList.get(position).getpComments(); //contains total number of comments for a post
@@ -123,9 +130,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 //increase value by 1, otherwise decrease value by 1
                 final int pLikes = Integer.parseInt(postList.get(position).getpLikes());
                 mProcessLike = true;
-                final DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-                final DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
-                final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
                 //get id of the post clicked
                 final String postId = postList.get(position).getpId();
                 likesRef.addValueEventListener(new ValueEventListener() {
@@ -179,8 +184,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
     private void setLikes(MyHolder holder, String pId) {
-        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-        final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         likesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
