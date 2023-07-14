@@ -21,6 +21,9 @@
         android:theme="@style/Base.Theme.NetworkSocial"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.PostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.AddPostActivity"
             android:exported="false" />
         <activity
