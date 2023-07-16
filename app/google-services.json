@@ -8,35 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1058653607565:android:53485b614a9074c5abb4c4",
-        "android_client_info": {
-          "package_name": "com.example.myapplication"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1058653607565-20nlp14ac35cncnp5qi2hu1u6d9573ee.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC-_t3x-D-fXodj-xVWYerNC6hi7PQT1cE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1058653607565-20nlp14ac35cncnp5qi2hu1u6d9573ee.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1058653607565:android:6b8df3d5cec458f1abb4c4",
         "android_client_info": {
           "package_name": "com.example.networksocial"
@@ -44,34 +15,21 @@
       },
       "oauth_client": [
         {
-          "client_id": "1058653607565-20nlp14ac35cncnp5qi2hu1u6d9573ee.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
+          "client_id": "1058653607565-9mbueiljefv1e4l3i3o4m9v8hdrlofbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.networksocial",
+            "certificate_hash": "a0a2d911f3c828831d0719b1d20f5737e419f2b7"
+          }
+        },
         {
-          "current_key": "AIzaSyC-_t3x-D-fXodj-xVWYerNC6hi7PQT1cE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1058653607565-20nlp14ac35cncnp5qi2hu1u6d9573ee.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1058653607565:android:23a5257966249b69abb4c4",
-        "android_client_info": {
-          "package_name": "com.example.socialnetwork"
-        }
-      },
-      "oauth_client": [
+          "client_id": "1058653607565-mc9vntl24t4f7lthjrt55rn0t47n55sp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.networksocial",
+            "certificate_hash": "610d6c5dbf1bd543fb7230cb93f34bb1d2983bbf"
+          }
+        },
         {
           "client_id": "1058653607565-20nlp14ac35cncnp5qi2hu1u6d9573ee.apps.googleusercontent.com",
           "client_type": 3
