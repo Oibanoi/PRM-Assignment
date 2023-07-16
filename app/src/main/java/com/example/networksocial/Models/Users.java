@@ -1,11 +1,11 @@
 package com.example.networksocial.Models;
 
 public class Users {
-    String name, email, search, phone, image, cover, uid;
+    String name, email, search, phone, image, cover, uid, onlineStatus, typingTo;
     boolean isBlocked = false;
     public Users() {}
 
-    public Users(String name, String email, String search, String phone, String image, String cover, String uid, boolean isBlocked) {
+    public Users(String name, String email, String search, String phone, String image, String cover, String uid, String onlineStatus, String typingTo, boolean isBlocked) {
         this.name = name;
         this.email = email;
         this.search = search;
@@ -13,6 +13,8 @@ public class Users {
         this.image = image;
         this.cover = cover;
         this.uid = uid;
+        this.onlineStatus = onlineStatus;
+        this.typingTo = typingTo;
         this.isBlocked = isBlocked;
     }
 
@@ -78,5 +80,21 @@ public class Users {
 
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
+    }
+
+    public String getOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(String onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
+
+    public String getTypingTo() {
+        return typingTo;
+    }
+
+    public void setTypingTo(String typingTo) {
+        this.typingTo = typingTo;
     }
 }
