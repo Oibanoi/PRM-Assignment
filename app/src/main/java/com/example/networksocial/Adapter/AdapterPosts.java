@@ -110,7 +110,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
         try {
             Picasso.get().load(uDp).into(holder.uPictureIv);
         } catch (Exception ex ) {
-            Picasso.get().load(uDp).placeholder(R.drawable.ic_default_img).into(holder.uPictureIv);
+            Picasso.get().load(R.drawable.ic_default_img).into(holder.uPictureIv);
         }
 
         //handle button clicks

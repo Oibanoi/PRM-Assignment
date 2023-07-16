@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +25,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.example.networksocial.R;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //-----------Google Sign In-------------------
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -145,12 +155,46 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == 100) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                task.getResult(ApiException.class);
-                dashboardActivity();
+                firebaseAuthWithGoogle(task.getResult(ApiException.class));
+//                dashboardActivity();
             } catch (ApiException e) {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Đăng nhập thành công
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // Thực hiện các hành động sau khi đăng nhập thành công
+                            //add user to database
+                            HashMap<Object, String> hashMap = new HashMap<>();
+                            //put info into hashMap
+                            hashMap.put("email",user.getEmail());
+                            hashMap.put("uid", user.getUid());
+                            hashMap.put("name", user.getEmail().split("@")[0]);
+                            hashMap.put("phone", "");
+                            hashMap.put("image", "");
+                            hashMap.put("cover", "");
+
+                            FirebaseDatabase fData = FirebaseDatabase.getInstance();
+                            //path to store user data named "Users"
+                            DatabaseReference ref = fData.getReference("Users");
+                            ref.child(user.getUid()).setValue(hashMap);
+
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            finish();
+                        } else {
+                            // Đăng nhập thất bại
+                        }
+                    }
+                });
     }
 
     private void dashboardActivity() {
