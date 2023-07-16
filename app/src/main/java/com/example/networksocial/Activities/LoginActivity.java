@@ -182,6 +182,8 @@ public class LoginActivity extends AppCompatActivity {
                             hashMap.put("phone", "");
                             hashMap.put("image", "");
                             hashMap.put("cover", "");
+                            hashMap.put("onlineStatus", "online");
+
 
                             FirebaseDatabase fData = FirebaseDatabase.getInstance();
                             //path to store user data named "Users"
@@ -264,6 +266,10 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         FirebaseUser user = mAuth.getCurrentUser();
                         //user is logged in, so start LoginActivity
+                        FirebaseDatabase fData = FirebaseDatabase.getInstance();
+                        //path to store user data named "Users"
+                        DatabaseReference ref = fData.getReference("Users");
+                        ref.child(user.getUid()).child("onlineStatus").setValue("online");
                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                         finish();
                     } else {

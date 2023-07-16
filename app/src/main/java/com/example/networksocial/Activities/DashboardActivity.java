@@ -21,6 +21,8 @@ import com.example.networksocial.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -108,4 +110,19 @@ public class DashboardActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("online");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("offline");
+    }
 }

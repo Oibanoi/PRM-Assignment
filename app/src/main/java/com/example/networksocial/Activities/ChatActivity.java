@@ -418,6 +418,37 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("type","text");
         databaseReference.child("Chats").push().setValue(hashMap);
         messageEt.setText("");
+
+        //creae chatlist node/child in firebase database
+        DatabaseReference chatRef=FirebaseDatabase.getInstance().getReference("ChatList").child(myUid).child(userUID);
+        chatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    chatRef.child("id").setValue(userUID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference chatRef2=FirebaseDatabase.getInstance().getReference("ChatList").child(userUID).child(myUid);
+        chatRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    chatRef2.child("id").setValue(myUid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     private void sendImageMessage(Uri image_uri) throws IOException {
         ProgressDialog progressDialog=new ProgressDialog(this);
