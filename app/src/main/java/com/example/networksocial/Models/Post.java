@@ -6,7 +6,7 @@ public class Post {
     private String pDescr;
     private String pImage;
     private String pTime;
-    private String uId;
+    private String uid;
     private String uEmail;
     private String uDp;
     private String uName;
@@ -17,13 +17,13 @@ public class Post {
 
     }
 
-    public Post(String pId, String pTitle, String pDescr, String pImage, String pTime, String uId, String uEmail, String uDp, String uName, String pLikes, String pComments) {
+    public Post(String pId, String pTitle, String pDescr, String pImage, String pTime, String uid, String uEmail, String uDp, String uName, String pLikes, String pComments) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pDescr = pDescr;
         this.pImage = pImage;
         this.pTime = pTime;
-        this.uId = uId;
+        this.uid = uid;
         this.uEmail = uEmail;
         this.uDp = uDp;
         this.uName = uName;
@@ -71,12 +71,12 @@ public class Post {
         this.pTime = pTime;
     }
 
-    public String getuId() {
-        return uId;
+    public String getUid() {
+        return uid;
     }
 
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getuEmail() {
@@ -118,5 +118,4 @@ public class Post {
     public void setpComments(String pComments) {
         this.pComments = pComments;
     }
-
 }
