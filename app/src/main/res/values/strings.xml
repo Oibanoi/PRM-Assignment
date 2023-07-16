@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NetworkSocial</string>
+    <string name="app_name">Network Social</string>
     <string name="title_activity_register">register</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

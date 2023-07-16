@@ -8,4 +8,10 @@
     <color name="Color_Lola">#F2edf2</color>
     <color name="colorWhite">#fff</color>
     <color name="colorBGChat">#F1EDED</color>
+
+    <color name="start_color">#d9a7c7</color>
+    <color name="end_color">#fffcdc</color>
+
+    <color name="btn_start_color">#6a3093</color>
+    <color name="btn_end_color">#a044ff</color>
 </resources>

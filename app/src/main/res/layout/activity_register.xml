@@ -5,18 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:padding="20dp"
     tools:context=".Activities.RegisterActivity">
+
+    <!--Input Email-->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:theme="@style/MyTextBold" />
 
-    <!--Input Email-->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +62,8 @@
         android:text="Register "
         android:layout_below="@id/passwordTIL"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/Color_Lola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

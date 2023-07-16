@@ -77,15 +77,16 @@ public class DashboardActivity extends AppCompatActivity {
             ft3.replace(R.id.content ,usersFragment, "");
             ft3.commit();
             return true;
-        } else if (id == R.id.nav_chat) {
-
-            //Users fragment
-            ChatListFragment chatListFragment = new ChatListFragment();
-            FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
-            ft4.replace(R.id.content, chatListFragment, "");
-            ft4.commit();
-            return true;
         }
+//        else if (id == R.id.nav_chat) {
+//
+//            //Users fragment
+//            ChatListFragment chatListFragment = new ChatListFragment();
+//            FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
+//            ft4.replace(R.id.content, chatListFragment, "");
+//            ft4.commit();
+//            return true;
+//        }
         return false;
     };
 
