@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.register_btn);
         loginBtn = findViewById(R.id.login_btn);
 
+        Toolbar toolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
 
 
         //Handle register button

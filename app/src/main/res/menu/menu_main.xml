@@ -16,5 +16,4 @@
         app:showAsAction="ifRoom"
         android:title="Add Post"
         />
-
 </menu>

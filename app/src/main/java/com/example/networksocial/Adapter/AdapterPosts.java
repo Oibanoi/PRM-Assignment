@@ -55,7 +55,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate layout row_post.xml
         View view = LayoutInflater.from(context).inflate(R.layout.row_posts, parent, false);
-
         return new MyHolder(view);
     }
 
@@ -106,7 +105,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 holder.pImageIv.setVisibility(View.GONE);
             }
         }
-
         try {
             Picasso.get().load(uDp).into(holder.uPictureIv);
         } catch (Exception ex ) {
