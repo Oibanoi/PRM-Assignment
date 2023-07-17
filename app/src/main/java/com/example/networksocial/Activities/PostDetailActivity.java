@@ -575,4 +575,20 @@ public class PostDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("online");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("offline");
+    }
 }

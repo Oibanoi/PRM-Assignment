@@ -31,7 +31,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.networksocial.Adapter.AdapterChat;
-import com.example.networksocial.Adapter.AdapterUsers;
 import com.example.networksocial.Models.Chat;
 import com.example.networksocial.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     ImageView profileTv, blockIv;
-    TextView nameTv, userStatusTv;
+    TextView nameTv, userStatusLabelTv, userStatusTv;
     EditText messageEt;
     ImageButton sendBtn, attachBtn;
 
@@ -106,10 +105,11 @@ public class ChatActivity extends AppCompatActivity {
         profileTv = findViewById(R.id.profileTv);
         blockIv = findViewById(R.id.blockIv);
         nameTv = findViewById(R.id.nameTv);
-        userStatusTv = findViewById(R.id.userStatusTv);
+        userStatusLabelTv = findViewById(R.id.userStatusLabelTv);
         messageEt = findViewById(R.id.messageEt);
         sendBtn = findViewById(R.id.sendBtn);
         attachBtn = findViewById(R.id.attachBtn);
+        userStatusTv = findViewById(R.id.userStatusTv);
 
         //init permissions array
         cameraPermissions = new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -136,6 +136,12 @@ public class ChatActivity extends AppCompatActivity {
                 for (DataSnapshot ds: snapshot.getChildren()){
                     String name=""+ ds.child("name").getValue();
                     userImage=""+ ds.child("image").getValue();
+                    userStatusTv.setText(""+ ds.child("onlineStatus").getValue());
+                    if("online".equals(userStatusTv.getText().toString())){
+                        userStatusTv.setTextColor(getResources().getColor(R.color.colorOnline));
+                    }else{
+                        userStatusTv.setTextColor(getResources().getColor(R.color.colorOffline));
+                    }
 
                     nameTv.setText(name);
                     try{
@@ -617,5 +623,21 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("online");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(user.getUid()).child("onlineStatus").setValue("offline");
     }
 }
